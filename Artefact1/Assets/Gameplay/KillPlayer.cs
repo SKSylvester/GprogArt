@@ -7,6 +7,7 @@ public class KillPlayer : MonoBehaviour
 {
     private Rigidbody2D Killrb;
     public int Respawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +21,12 @@ public class KillPlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (CompareTag("Player"))
+        if (collision.CompareTag("Player")) //checks the tag of the object it collides with
         {
             Debug.Log("Player collided with something.");
 
 
-            SceneManager.LoadScene(Respawn); //If the player collides with triagle in loads the scene.
+            SceneManager.LoadScene(Respawn); //Restarts the game
             Debug.Log("Scene reloaded.");
         }
     }
