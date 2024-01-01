@@ -27,9 +27,16 @@ public class Player : MonoBehaviour
             Debug.Log("Player has a key");
 
             KeyCollected++; //increase by 1 everytime code is true.
-
+            {
+                DoorController doorController = FindObjectOfType<DoorController>();
+                if (doorController != null) //Checks how many keys the player has compared to the required
+                {
+                    doorController.CheckKeys();
+                }
+            }
             collision.gameObject.SetActive(false); //deletes the object when player collides.
             Debug.Log("Key collected! Total keys: " + KeyCollected);
+            
         }
     }
 }
