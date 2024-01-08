@@ -16,15 +16,7 @@ public class KeyCollection : MonoBehaviour
         
     }
     void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Key"))
-        {
-            Debug.Log("Collision detected");
-            DoorController doorController = FindObjectOfType<DoorController>();
-            if (doorController != null)
-            {
-                doorController.CheckKeys();
-            }
-        }
+    { 
+        
     }
 }

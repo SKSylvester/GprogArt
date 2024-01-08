@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D playerRB;
     public int KeyCollected = 0; //public value for the current amount coins. 
+    public List<DoorController> doorControllers = new List<DoorController>();
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,19 +25,17 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Key"))
         {
-            Debug.Log("Player has a key");
-
-            KeyCollected++; //increase by 1 everytime code is true.
-            {
-                DoorController doorController = FindObjectOfType<DoorController>();
-                if (doorController != null) //Checks how many keys the player has compared to the required
-                {
-                    doorController.CheckKeys();
-                }
-            }
-            collision.gameObject.SetActive(false); //deletes the object when player collides.
+            KeyCollected++; //Increases by 1 everytime player gets a key
+            collision.gameObject.SetActive(false);
             Debug.Log("Key collected! Total keys: " + KeyCollected);
-            
+            CheckAllDoors();
+        }
+    }
+    private void CheckAllDoors()
+    {
+        foreach (DoorController door in doorControllers)
+        {
+            door.CheckKeys(KeyCollected);
         }
     }
 }
